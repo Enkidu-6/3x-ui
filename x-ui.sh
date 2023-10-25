@@ -42,10 +42,17 @@ if [[ "${release}" == "centos" ]]; then
     if [[ ${os_version} -lt 8 ]]; then
         echo -e "${red} Please use CentOS 8 or higher ${plain}\n" && exit 1
     fi
+
+elif [[ "${release}" == "almalinux" ]]; then
+    if [[ ${os_version} -lt 8 ]]; then
+        echo -e "${red}please use almalinux 8 or higher version! ${plain}\n" && exit 1
+    fi    
+    
 elif [[ "${release}" == "ubuntu" ]]; then
     if [[ ${os_version} -lt 20 ]]; then
         echo -e "${red}please use Ubuntu 20 or higher version! ${plain}\n" && exit 1
     fi
+    
 elif [[ "${release}" == "fedora" ]]; then
     if [[ ${os_version} -lt 36 ]]; then
         echo -e "${red}please use Fedora 36 or higher version! ${plain}\n" && exit 1
@@ -321,7 +328,7 @@ enable_bbr() {
         ubuntu|debian)
             apt-get update && apt-get install -yqq --no-install-recommends ca-certificates
             ;;
-        centos)
+        centos|almalinux)
             yum -y update && yum -y install ca-certificates
             ;;
         fedora)
@@ -519,13 +526,12 @@ update_geo() {
 
     systemctl stop x-ui
     cd ${binFolder}
-    rm -f geoip.dat geosite.dat geoip_IR.dat geosite_IR.dat
+    rm -f geoip.dat geosite.dat iran.dat
     wget -N https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
     wget -N https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
-    wget -O geoip_IR.dat -N https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geoip.dat
-    wget -O geosite_IR.dat -N https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geosite.dat
+    wget -N https://github.com/MasterKia/iran-hosted-domains/releases/latest/download/iran.dat
     systemctl start x-ui
-    echo -e "${green}Geosite.dat + Geoip.dat + geoip_IR.dat + geosite_IR.dat have been updated successfully in bin folder '${binfolder}'!${plain}"
+    echo -e "${green}Geosite.dat + Geoip.dat + Iran.dat have been updated successfully in bin folder '${binfolder}'!${plain}"
     before_show_menu
 }
 
@@ -581,7 +587,7 @@ ssl_cert_issue() {
     case "${release}" in
         ubuntu|debian)
             apt update && apt install socat -y ;;
-        centos)
+        centos|almalinux)
             yum -y update && yum -y install socat ;;
         fedora)
             dnf -y update && dnf -y install socat ;;
@@ -924,7 +930,7 @@ install_iplimit() {
         case "${release}" in
             ubuntu|debian)
                 apt update && apt install fail2ban -y ;;
-            centos)
+            centos|almalinux)
                 yum -y update && yum -y install fail2ban ;;
             fedora)
                 dnf -y update && dnf -y install fail2ban ;;
@@ -987,7 +993,7 @@ remove_iplimit(){
             case "${release}" in
                 ubuntu|debian)
                     apt-get purge fail2ban -y;;
-                centos)
+                centos|almalinux)
                     yum remove fail2ban -y;;
                 fedora)
                     dnf remove fail2ban -y;;
