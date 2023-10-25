@@ -35,10 +35,16 @@ echo "arch: $(arch3xui)"
 os_version=""
 os_version=$(grep -i version_id /etc/os-release | cut -d \" -f2 | cut -d . -f1)
 
-if [[ "${release}" == "centos" ]]; then
+if [[ "${release}" == "almalinux" ]]; then
     if [[ ${os_version} -lt 8 ]]; then
-        echo -e "${red} Please use CentOS 8 or higher ${plain}\n" && exit 1
+        echo -e "${red} Please use almalinux 8 or higher ${plain}\n" && exit 1
     fi
+
+elif [[ "${release}" == "centos" ]]; then
+    if [[ ${os_version} -lt 8 ]]; then
+        echo -e "${red}please use CentOS 8 or higher version!${plain}\n" && exit 1
+    fi
+    
 elif [[ "${release}" == "ubuntu" ]]; then
     if [[ ${os_version} -lt 20 ]]; then
         echo -e "${red}please use Ubuntu 20 or higher version!${plain}\n" && exit 1
@@ -64,6 +70,12 @@ install_base() {
     case "${release}" in
         centos|fedora)
             yum install -y -q wget curl tar
+            ;;
+        almalinux)
+            dnf install yum-utils -y
+            dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+            dnf remove podman buildah -y
+            dnf install -y -q wget curl tar
             ;;
         arch)
             pacman -Syu --noconfirm wget curl tar
