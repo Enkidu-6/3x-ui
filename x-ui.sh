@@ -55,8 +55,8 @@ elif [[ "${release}" == "debian" ]]; then
         echo -e "${red} Please use Debian 10 or higher ${plain}\n" && exit 1
     fi
 elif [[ "${release}" == "almalinux" ]]; then
-    if [[ ${os_version} -lt 9 ]]; then
-        echo -e "${red} Please use Almalinux 9 or higher ${plain}\n" && exit 1
+    if [[ ${os_version} -lt 8 ]]; then
+        echo -e "${red} Please use Almalinux 8 or higher ${plain}\n" && exit 1
     fi
 elif [[ "${release}" == "arch" ]]; then
     echo "Your OS is ArchLinux"
@@ -104,7 +104,7 @@ before_show_menu() {
 }
 
 install() {
-    bash <(curl -Ls https://raw.githubusercontent.com/MHSanaei/3x-ui/main/install.sh)
+    bash <(curl -Ls https://raw.githubusercontent.com/Enkidu-6/3x-ui/main/install.sh)
     if [[ $? == 0 ]]; then
         if [[ $# == 0 ]]; then
             start
@@ -123,7 +123,7 @@ update() {
         fi
         return 0
     fi
-    bash <(curl -Ls https://raw.githubusercontent.com/MHSanaei/3x-ui/main/install.sh)
+    bash <(curl -Ls https://raw.githubusercontent.com/Enkidu-6/3x-ui/main/install.sh)
     if [[ $? == 0 ]]; then
         LOGI "Update is complete, Panel has automatically restarted "
         exit 0
@@ -139,7 +139,7 @@ custom_version() {
     exit 1
     fi
 
-    download_link="https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh"
+    download_link="https://raw.githubusercontent.com/Enkidu-6/3x-ui/master/install.sh"
 
     # Use the entered panel version in the download link
     install_command="bash <(curl -Ls $download_link) v$panel_version"
@@ -347,7 +347,7 @@ enable_bbr() {
         ubuntu|debian)
             apt-get update && apt-get install -yqq --no-install-recommends ca-certificates
             ;;
-        centos)
+        centos|almalinux)
             yum -y update && yum -y install ca-certificates
             ;;
         fedora)
@@ -375,7 +375,7 @@ enable_bbr() {
 }
 
 update_shell() {
-    wget -O /usr/bin/x-ui -N --no-check-certificate https://github.com/MHSanaei/3x-ui/raw/main/x-ui.sh
+    wget -O /usr/bin/x-ui -N --no-check-certificate https://github.com/Enkidu-6/3x-ui/raw/main/x-ui.sh
     if [[ $? != 0 ]]; then
         echo ""
         LOGE "Failed to download script, Please check whether the machine can connect Github"
@@ -609,7 +609,7 @@ ssl_cert_issue() {
     case "${release}" in
         ubuntu|debian|armbian)
             apt update && apt install socat -y ;;
-        centos)
+        centos|almalinux)
             yum -y update && yum -y install socat ;;
         fedora)
             dnf -y update && dnf -y install socat ;;
@@ -952,7 +952,7 @@ install_iplimit() {
         case "${release}" in
             ubuntu|debian)
                 apt update && apt install fail2ban -y ;;
-            centos)
+            centos|almalinux)
                 yum -y update && yum -y install fail2ban ;;
             fedora)
                 dnf -y update && dnf -y install fail2ban ;;
@@ -1015,7 +1015,7 @@ remove_iplimit(){
             case "${release}" in
                 ubuntu|debian)
                     apt-get purge fail2ban -y;;
-                centos)
+                centos|almalinux)
                     yum remove fail2ban -y;;
                 fedora)
                     dnf remove fail2ban -y;;
