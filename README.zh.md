@@ -28,10 +28,10 @@ bash <(curl -Ls https://raw.githubusercontent.com/Enkidu-6/3x-ui/master/install.
 
 ## 安装指定版本
 
-要安装所需的版本，请将该版本添加到安装命令的末尾。 e.g., ver `v2.2.6`:
+要安装所需的版本，请将该版本添加到安装命令的末尾。 e.g., ver `2.2.6`:
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/Enkidu-6/3x-ui/master/install.sh) v2.2.6
+bash <(curl -Ls https://raw.githubusercontent.com/Enkidu-6/3x-ui/master/install.sh) 2.2.6
 ```
 
 ## SSL 认证
