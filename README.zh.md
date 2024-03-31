@@ -23,7 +23,7 @@
 ## 安装 & 升级
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/Enkidu-6/3x-ui/master/install.sh)
 ```
 
 ## 安装指定版本
@@ -31,7 +31,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 要安装所需的版本，请将该版本添加到安装命令的末尾。 e.g., ver `v2.2.6`:
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh) v2.2.6
+bash <(curl -Ls https://raw.githubusercontent.com/Enkidu-6/3x-ui/master/install.sh) v2.2.6
 ```
 
 ## SSL 认证
@@ -83,7 +83,7 @@ case "${ARCH}" in
 esac
 
 
-wget https://github.com/MHSanaei/3x-ui/releases/latest/download/x-ui-linux-${XUI_ARCH}.tar.gz
+wget https://github.com/Enkidu-6/3x-ui/releases/latest/download/x-ui-linux-${XUI_ARCH}.tar.gz
 ```
 
 2. 下载压缩包后，执行以下命令安装或升级 x-ui：
@@ -130,7 +130,7 @@ systemctl restart x-ui
 2. 克隆仓库：
 
    ```sh
-   git clone https://github.com/MHSanaei/3x-ui.git
+   git clone https://github.com/Enkidu-6/3x-ui.git
    cd 3x-ui
    ```
 
@@ -150,7 +150,7 @@ systemctl restart x-ui
       --network=host \
       --restart=unless-stopped \
       --name 3x-ui \
-      ghcr.io/mhsanaei/3x-ui:latest
+      enkidu6/3x-ui:latest
    ```
 
 更新至最新版本
